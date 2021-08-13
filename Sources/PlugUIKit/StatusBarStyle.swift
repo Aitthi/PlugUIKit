@@ -8,7 +8,7 @@
 import SwiftUI
 
 public class LocalStatusBarStyle { // style proxy to be stored in Environment
-    fileprivate var getter: () -> UIStatusBarStyle = { .default }
+    fileprivate var getter: () -> UIStatusBarStyle = { .darkContent }
     fileprivate var setter: (UIStatusBarStyle) -> Void = {_ in}
 
     public var currentStyle: UIStatusBarStyle {
@@ -17,20 +17,8 @@ public class LocalStatusBarStyle { // style proxy to be stored in Environment
     }
 }
 
-struct LocalStatusBarStyleKey: EnvironmentKey {
-    static let defaultValue: LocalStatusBarStyle = LocalStatusBarStyle()
-}
-
-extension EnvironmentValues {
-    public var localStatusBarStyle: LocalStatusBarStyle {
-        get {
-            return self[LocalStatusBarStyleKey.self]
-        }
-    }
-}
-
 class PgUiHostingController<Content>: UIHostingController<Content> where Content:View {
-    private var internalStyle = UIStatusBarStyle.lightContent
+    private var internalStyle = UIStatusBarStyle.darkContent
 
     @objc override dynamic open var preferredStatusBarStyle: UIStatusBarStyle {
         get {
