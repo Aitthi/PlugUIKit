@@ -1,6 +1,6 @@
 # PlugUIKit
 
-A description of this package.
+SwiftUI Component Library.
 
 
 ## License
