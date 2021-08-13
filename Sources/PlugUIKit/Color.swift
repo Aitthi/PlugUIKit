@@ -37,32 +37,7 @@ extension Color {
     
 }
 
-public class PgUiColorTheme{
-    
-    // Main
-    public var primaryColor: String = "#5539b4"
-    public var secondaryColor: String = "#7354eb"
-    public var tertiaryColor: String = "#372e68"
-    
-    // Text
-    public var primaryColorText: String = "#fff"
-    public var secondaryColorText: String = "#fff"
-    public var tertiaryColorText: String = "#fff"
-}
-
-struct PgUiColorThemeKey: EnvironmentKey {
-    static let defaultValue: PgUiColorTheme = PgUiColorTheme()
-}
-
-extension EnvironmentValues {
-    public var PgUiColorTheme:  PgUiColorTheme  {
-        get {
-            return self[PgUiColorThemeKey.self]
-        }
-    }
-}
-
-public enum PgUiColor:  CustomStringConvertible {
+public enum PgUiColor{
 
     @Environment(\.PgUiColorTheme) static var pgUiColorTheme: PgUiColorTheme
     
@@ -70,22 +45,12 @@ public enum PgUiColor:  CustomStringConvertible {
     case primary
     case secondary
     case tertiary
+    case success
+    case warning
+    case danger
+    case light
+    case dark
     case custom(BackgroundHex: String, TextHex: String = "#fff")
-    
-//    #7354eb,#5539b4,#372e68
-    
-    public var description: String{
-        switch self {
-        case .default, .primary:
-            return "Primary color."
-        case .secondary:
-            return "Secondary color."
-        case .tertiary:
-            return "Tertiary color."
-        case .custom:
-            return "custom color."
-        }
-    }
 
     public var Background: Color{
         switch self {
@@ -95,6 +60,16 @@ public enum PgUiColor:  CustomStringConvertible {
             return Color.init(hex: PgUiColor.pgUiColorTheme.secondaryColor)
         case .tertiary:
             return Color.init(hex: PgUiColor.pgUiColorTheme.tertiaryColor)
+        case .success:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.successColor)
+        case .warning:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.warningColor)
+        case .danger:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.dangerColor)
+        case .light:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.lightColor)
+        case .dark:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.darkColor)
         case .custom(let BackgroundHex, _):
             return Color.init(hex: BackgroundHex)
         }
@@ -108,6 +83,16 @@ public enum PgUiColor:  CustomStringConvertible {
             return Color.init(hex: PgUiColor.pgUiColorTheme.secondaryColorText)
         case .tertiary:
             return Color.init(hex: PgUiColor.pgUiColorTheme.tertiaryColorText)
+        case .success:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.successColorText)
+        case .warning:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.warningColorText)
+        case .danger:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.dangerColorText)
+        case .light:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.lightColorText)
+        case .dark:
+            return Color.init(hex: PgUiColor.pgUiColorTheme.darkColorText)
         case .custom(_, let TextHex):
             return Color.init(hex: TextHex)
         }
