@@ -14,11 +14,11 @@ public class PgUiColorTheme{
     public var primaryColor: String = "#5539b4"
     public var secondaryColor: String = "#7354eb"
     public var tertiaryColor: String = "#372e68"
-    public var successColor: String = "#2dd36f"
-    public var warningColor: String = "#ffc409"
-    public var dangerColor: String = "#eb445a"
+    public var successColor: String = "#48c78e"
+    public var warningColor: String = "#ffd560"
+    public var dangerColor: String = "#f14668"
     public var lightColor: String = "#f4f5f8"
-    public var darkColor: String = "#222428"
+    public var darkColor: String = "#1f2330"
     
     // Text
     public var primaryColorText: String = "#fff"
@@ -27,7 +27,7 @@ public class PgUiColorTheme{
     public var successColorText: String = "#fff"
     public var warningColorText: String = "#000"
     public var dangerColorText: String = "#fff"
-    public var lightColorText: String = "#000"
+    public var lightColorText: String = "#1f2330"
     public var darkColorText: String = "#fff"
     
 }
