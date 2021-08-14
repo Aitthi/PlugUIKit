@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct PgUiButton: View{
+public struct PgUiButton<Label>: View where Label : View {
     
     public enum PgUiButtonSize {
         case small
@@ -76,40 +76,38 @@ public struct PgUiButton: View{
         
     }
 
-
-    private var Label: String
+    private var Label: () -> Label
     private var ColorType: PgUiColor = .default
     private var Size: PgUiButtonSize = .default
     private var Width: PgUiButtonWidth = .default
     private var Style: PgUiButtonStyle = .default
-
-    // Actios
     private var action:  () -> Void
+    private let UISize = UIScreen.main.bounds
+    private var _cornerRadius: CGFloat = 10
     
-    public init(Label: String,
+    public init(action: @escaping () -> Void,
                 ColorType: PgUiColor = .default,
-                Size: PgUiButtonSize = .default, Width: PgUiButtonWidth = .default,
-                Style: PgUiButtonStyle = .default, action: @escaping () -> Void){
+                Size: PgUiButtonSize = .default,
+                Width: PgUiButtonWidth = .default,
+                Style: PgUiButtonStyle = .default,
+                Radius: CGFloat = 10,
+                @ViewBuilder label: @escaping () -> Label){
         
-        self.Label = Label
+        self.Label = label
         self.ColorType = ColorType
         self.Size = Size
         self.Width = Width
         self.Style = Style
+        self._cornerRadius = Radius
         self.action = action
-        
     }
-
-
-    // Private
-    private let UISize = UIScreen.main.bounds
-    public var _cornerRadius: CGFloat = 10
     
     public var body: some View{
-        
         if(self.Width == .default){
             if(self.Style == .default){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Text)
@@ -121,7 +119,9 @@ public struct PgUiButton: View{
             }
         
             if(self.Style == .light){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Background)
@@ -133,7 +133,9 @@ public struct PgUiButton: View{
             }
         
             if(self.Style == .lightOutline){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Text)
@@ -145,7 +147,9 @@ public struct PgUiButton: View{
             }
         
             if(self.Style == .lightFill){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Background)
@@ -160,7 +164,9 @@ public struct PgUiButton: View{
         if(self.Width == .block){
             GeometryReader { geo in
                 if(self.Style == .default){
-                    Button(self.Label, action: self.action)
+                    Button(action: self.action){
+                        self.Label()
+                    }
                     .font(.system(size: self.Size.FontSize))
                     .padding(.horizontal, 16)
                     .foregroundColor(self.ColorType.Text)
@@ -172,7 +178,9 @@ public struct PgUiButton: View{
                 }
             
                 if(self.Style == .light){
-                    Button(self.Label, action: self.action)
+                    Button(action: self.action){
+                        self.Label()
+                    }
                     .font(.system(size: self.Size.FontSize))
                     .padding(.horizontal, 16)
                     .foregroundColor(self.ColorType.Background)
@@ -184,7 +192,9 @@ public struct PgUiButton: View{
                 }
             
                 if(self.Style == .lightOutline){
-                    Button(self.Label, action: self.action)
+                    Button(action: self.action){
+                        self.Label()
+                    }
                     .font(.system(size: self.Size.FontSize))
                     .padding(.horizontal, 16)
                     .foregroundColor(self.ColorType.Text)
@@ -196,7 +206,9 @@ public struct PgUiButton: View{
                 }
             
                 if(self.Style == .lightFill){
-                    Button(self.Label, action: self.action)
+                    Button(action: self.action){
+                        self.Label()
+                    }
                     .font(.system(size: self.Size.FontSize))
                     .padding(.horizontal, 16)
                     .foregroundColor(self.ColorType.Background)
@@ -211,7 +223,9 @@ public struct PgUiButton: View{
         
         if(self.Width == .full){
             if(self.Style == .default){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Text)
@@ -222,7 +236,9 @@ public struct PgUiButton: View{
             }
         
             if(self.Style == .light){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Background)
@@ -233,7 +249,9 @@ public struct PgUiButton: View{
             }
         
             if(self.Style == .lightOutline){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Text)
@@ -244,7 +262,9 @@ public struct PgUiButton: View{
             }
         
             if(self.Style == .lightFill){
-                Button(self.Label, action: self.action)
+                Button(action: self.action){
+                    self.Label()
+                }
                 .font(.system(size: self.Size.FontSize))
                 .padding(.horizontal, 16)
                 .foregroundColor(self.ColorType.Background)
@@ -257,12 +277,3 @@ public struct PgUiButton: View{
         
     }
 }
-
-extension PgUiButton{
-
-    mutating func cornerRadius(_ radius: CGFloat){
-        self._cornerRadius = radius
-    }
-
-}
-

@@ -47,7 +47,7 @@ public enum PgUiColor{
     case dark
     case custom(BackgroundHex: String, TextHex: String = "#fff")
 
-    public var Background: Color{
+    public var Background:  Color  {
         switch self {
         case .default, .primary:
             return Color.init(hex: PgUiColor.pgUiColorTheme.primaryColor)
@@ -70,7 +70,7 @@ public enum PgUiColor{
         }
     }
     
-    public var Text: Color{
+    public var Text: Color {
         switch self {
         case .default, .primary:
             return Color.init(hex: PgUiColor.pgUiColorTheme.primaryColorText)
